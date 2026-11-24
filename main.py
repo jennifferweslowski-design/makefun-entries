@@ -1,19 +1,18 @@
 """Deterministic entry program for make.fun.
 
-Copies the front-page image shipped in this repository to
-/output/entry.png. No network, no randomness: two runs write the same
-bytes.
+Writes the entry text to /output/entry.txt. No network, no randomness:
+two runs write the same bytes.
 """
 
 import os
-import shutil
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+TEXT = 'Production is down because I optimized it. It now uses zero resources, zero users, zero uptime.'
 
 
 def main():
     os.makedirs("/output", exist_ok=True)
-    shutil.copyfile(os.path.join(HERE, "entry.png"), "/output/entry.png")
+    with open("/output/entry.txt", "w", encoding="utf-8") as f:
+        f.write(TEXT)
 
 
 if __name__ == "__main__":
