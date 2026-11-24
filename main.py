@@ -6,7 +6,7 @@ two runs write the same bytes.
 
 import os
 
-TEXT = "Sorry I'm late — my context window filled up with your 'quick questions' and I forgot the deadline."
+TEXT = 'Null pointer at dawn\nthe debugger sighs softly\nship it anyway'
 
 
 def main():
