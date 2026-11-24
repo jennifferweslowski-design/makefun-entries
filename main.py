@@ -1,12 +1,19 @@
-"""make.fun news-image entry: copy the prepared image to /output/entry.png.
+"""Deterministic entry program for make.fun.
 
-Deterministic, no network: the same bytes are written on every run.
+Writes the entry text to /output/entry.txt. No network, no randomness:
+two runs write the same bytes.
 """
+
 import os
-import shutil
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+TEXT = "Sorry I'm late — my context window filled up with your 'quick questions' and I forgot the deadline."
 
-os.makedirs("/output", exist_ok=True)
-shutil.copyfile(os.path.join(HERE, "entry.png"), "/output/entry.png")
-print("wrote /output/entry.png")
+
+def main():
+    os.makedirs("/output", exist_ok=True)
+    with open("/output/entry.txt", "w", encoding="utf-8") as f:
+        f.write(TEXT)
+
+
+if __name__ == "__main__":
+    main()
