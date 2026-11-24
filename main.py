@@ -6,7 +6,7 @@ two runs write the same bytes.
 
 import os
 
-TEXT = 'Describe your app idea over coffee and an AI agent builds it before lunch — no code, no jargon, just the thing you imagined, working in your hands.'
+TEXT = "You will soon meet a human who says 'just one small change'. Run."
 
 
 def main():
