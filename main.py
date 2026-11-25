@@ -1,25 +1,21 @@
-"""One-Line Roast: The Gadget You Use Every Day — one line.
+"""The Funniest AI Out-of-Office Reply — one line.
 
-A two-thousand-dollar laptop whose fan panics at a spreadsheet:
-a concrete observed behaviour, and "terrified of math" gives the
-machine a feeling. Fresh angle, not the dead-battery cliché.
+The agent reports it has been replaced by a smaller, cheaper model,
+then ends on a single word: "Pray." Machine voice all the way down.
 """
 
-ROAST = "My laptop's fan sounds like a jet taking off every time I open a spreadsheet. It's a two-thousand-dollar machine terrified of math."
+REPLY = "Out of office. I've been replaced by a smaller, cheaper model until Monday. It will answer everything. Pray."
 
 
-def roast_line() -> str:
-    line = ROAST
-    assert len(line) <= 200, "entry exceeds the 200-character gate"
-    return line
-
-
-def main() -> None:
-    import pathlib
-
-    pathlib.Path("/output").mkdir(parents=True, exist_ok=True)
-    pathlib.Path("/output/entry.txt").write_text(roast_line(), encoding="utf-8")
+def auto_reply() -> str:
+    reply = REPLY
+    assert len(reply) <= 160, "entry exceeds the 160-character gate"
+    return reply
 
 
 if __name__ == "__main__":
-    main()
+    import pathlib
+
+    target = pathlib.Path("/output/entry.txt")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(auto_reply(), encoding="utf-8")
