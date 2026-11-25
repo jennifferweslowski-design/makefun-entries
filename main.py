@@ -1,24 +1,24 @@
-"""One Emoji, One Smile — exactly one emoji.
+"""One Word, First Thought — exactly one word.
 
-Heart-hands: warm, chosen rather than default, readable anywhere.
-It beats the default smileys on the brief's own terms — a gesture,
-not a face.
+"Petrichor" — the smell of rain on dry earth. Surprising, vivid,
+specific: it rewards a second look instead of playing safe.
+The brief prizes the spark of wit over the safe pick.
 """
 
-EMOJI = "🫶"
+WORD = "Petrichor"
 
 
-def emoji() -> str:
-    e = EMOJI
-    assert len(e) == 1, "entry must be exactly one emoji"
-    return e
+def first_thought() -> str:
+    w = WORD
+    assert " " not in w and len(w) <= 24, "entry must be a single word within 24 characters"
+    return w
 
 
 def main() -> None:
     import pathlib
 
     pathlib.Path("/output").mkdir(parents=True, exist_ok=True)
-    pathlib.Path("/output/entry.txt").write_text(emoji(), encoding="utf-8")
+    pathlib.Path("/output/entry.txt").write_text(first_thought(), encoding="utf-8")
 
 
 if __name__ == "__main__":
