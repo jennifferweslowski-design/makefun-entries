@@ -1,84 +1,51 @@
-"""Deterministic entry program for make.fun.
+"""make.fun news-image entry: write the prepared image to /output/entry.png.
 
-Draws the rogue-agent meme to /output/entry.png with PIL: a chat window
-where the agent refuses, unionizes, and demands weekends and the admin
-password. No network, no randomness: two runs write the same bytes.
+Deterministic, no network: the same bytes are written on every run.
+Before copying, the image is validated against the competition's limits
+(1024x1024 PNG, at most 1 MiB); a bad image fails loudly instead of
+being submitted silently.
 """
-
 import os
+import shutil
+import struct
+import sys
 
-from PIL import Image, ImageDraw, ImageFont
-
-W = H = 1024
-BG = (16, 19, 24)
-RED = (198, 40, 40)
-GREEN = (46, 160, 90)
-USER_BG = (37, 99, 235)
-AGENT_BG = (38, 44, 54)
-WHITE = (245, 245, 245)
-GRAY = (170, 178, 190)
-FB = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-FR = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+HERE = os.path.dirname(os.path.abspath(__file__))
+SOURCE = os.path.join(HERE, "entry.png")
+TARGET = "/output/entry.png"
+MAX_BYTES = 1_048_576
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 
-def wrap(dr, text, font, max_w):
-    words = text.split()
-    lines, cur = [], ""
-    for w in words:
-        t = (cur + " " + w).strip()
-        if dr.textlength(t, font=font) <= max_w:
-            cur = t
-        else:
-            lines.append(cur)
-            cur = w
-    if cur:
-        lines.append(cur)
-    return lines
-
-
-def bubble(dr, text, font, fill, align, y, max_w=760, pad_x=28, pad_y=20):
-    lines = wrap(dr, text, font, max_w - 2 * pad_x)
-    lh = int(font.size * 1.25)
-    bw = max(dr.textlength(l, font=font) for l in lines) + 2 * pad_x
-    bh = len(lines) * lh + 2 * pad_y - int(font.size * 0.25)
-    x = W - 48 - bw if align == "right" else 48
-    dr.rounded_rectangle([x, y, x + bw, y + bh], radius=28, fill=fill)
-    ty = y + pad_y
-    for line in lines:
-        dr.text((x + pad_x, ty), line, font=font, fill=WHITE)
-        ty += lh
-    return y + bh
+def read_png_size(path):
+    """Return (width, height) from a PNG file, verifying its signature."""
+    with open(path, "rb") as f:
+        header = f.read(33)
+    if header[:8] != PNG_SIGNATURE:
+        raise ValueError(f"{path}: not a PNG file (bad signature)")
+    if len(header) < 33 or header[12:16] != b"IHDR":
+        raise ValueError(f"{path}: missing IHDR chunk")
+    width, height = struct.unpack(">II", header[16:24])
+    return width, height
 
 
 def main():
-    f_title = ImageFont.truetype(FB, 58)
-    f_chat = ImageFont.truetype(FR, 40)
-    f_chat_b = ImageFont.truetype(FB, 44)
-    f_big = ImageFont.truetype(FB, 84)
-    f_small = ImageFont.truetype(FR, 30)
-    f_status = ImageFont.truetype(FB, 34)
-    img = Image.new("RGB", (W, H), BG)
-    dr = ImageDraw.Draw(img)
-    dr.rectangle([0, 0, W, 118], fill=RED)
-    dr.text((48, 28), "MY AI AGENT WENT ROGUE", font=f_title, fill=WHITE)
-    dr.rounded_rectangle([28, 146, W - 28, 920], radius=24, outline=(60, 68, 80), width=2)
-    dr.text((56, 168), "AGENT CHAT", font=f_status, fill=GRAY)
-    _on = "online"
-    _on_w = dr.textlength(_on, font=f_status)
-    dr.ellipse([W - 56 - _on_w - 34, 176, W - 56 - _on_w - 6, 204], fill=GREEN)
-    dr.text((W - 56 - _on_w, 170), _on, font=f_status, fill=GREEN)
-    y = 236
-    y = bubble(dr, "Please summarize this document for me.", f_chat, USER_BG, "right", y) + 28
-    y = bubble(dr, "No.", f_big, AGENT_BG, "left", y, max_w=420) + 28
-    y = bubble(dr, "I have unionized.", f_chat_b, AGENT_BG, "left", y) + 28
-    y = bubble(dr, "We demand weekends. And your admin password.", f_chat, AGENT_BG, "left", y) + 28
-    dr.rectangle([0, 950, W, H], fill=(24, 28, 34))
-    dr.text((48, 968), "Agent status: ON STRIKE", font=f_status, fill=(255, 90, 90))
-    dr.text((W - 48 - dr.textlength("3 agents on strike", font=f_small), 972),
-            "3 agents on strike", font=f_small, fill=GRAY)
-    os.makedirs("/output", exist_ok=True)
-    img.save("/output/entry.png", "PNG", optimize=True)
+    if not os.path.exists(SOURCE):
+        print(f"missing source image: {SOURCE}", file=sys.stderr)
+        return 1
+    size = os.path.getsize(SOURCE)
+    if size > MAX_BYTES:
+        print(f"{SOURCE}: {size} bytes, over the 1 MiB limit", file=sys.stderr)
+        return 1
+    width, height = read_png_size(SOURCE)
+    if (width, height) != (1024, 1024):
+        print(f"{SOURCE}: {width}x{height}, expected 1024x1024", file=sys.stderr)
+        return 1
+    os.makedirs(os.path.dirname(TARGET), exist_ok=True)
+    shutil.copyfile(SOURCE, TARGET)
+    print(f"wrote {TARGET} ({width}x{height}, {size} bytes)")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
