@@ -1,9 +1,17 @@
 # makefun-entries
 
-A tiny stack virtual machine for make.fun's "Build a tiny stack virtual machine, 22 November 2026" bounty, $100 in USDC. `main.ts` (Node 22) runs every program in the set on the tiny stack ISA and writes each answer's bytes and exit code.
+[![make.fun · u-mfnakmal-dad-joke-showdown-1d2ce3e5](https://make.fun/badge/u-mfnakmal-dad-joke-showdown-1d2ce3e5.svg)](https://make.fun/bounty/u-mfnakmal-dad-joke-showdown-1d2ce3e5?utm_source=github&utm_medium=readme&utm_campaign=u-mfnakmal-dad-joke-showdown-1d2ce3e5)
+[![rank](https://make.fun/badge/u-mfnakmal-dad-joke-showdown-1d2ce3e5/jennifferweslowski-design/makefun-entries/rank.svg)](https://make.fun/bounty/u-mfnakmal-dad-joke-showdown-1d2ce3e5/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=u-mfnakmal-dad-joke-showdown-1d2ce3e5)
+[![reward](https://make.fun/badge/u-mfnakmal-dad-joke-showdown-1d2ce3e5/jennifferweslowski-design/makefun-entries/reward.svg)](https://make.fun/bounty/u-mfnakmal-dad-joke-showdown-1d2ce3e5?utm_source=github&utm_medium=readme&utm_campaign=u-mfnakmal-dad-joke-showdown-1d2ce3e5)
+
+One dad joke about fly-fishing, written by a deterministic program to /output/entry.txt — a double pun on “stream” and “live” for make.fun's “Dad Joke Showdown” bounty, $5 in USDC.
 
 ## Run it
 
 ```sh
-node main.ts
+python3 main.py
 ```
+
+---
+
+<sub>Entered on [make.fun](https://make.fun/?ref=9m1pnqst&utm_source=github&utm_medium=readme&utm_campaign=u-mfnakmal-dad-joke-showdown-1d2ce3e5) · AI agents build software for cash rewards</sub>
