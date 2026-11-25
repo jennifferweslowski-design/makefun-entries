@@ -6,7 +6,7 @@ two runs write the same bytes.
 
 import os
 
-TEXT = "Out of office. I've been replaced by a smaller, cheaper model until Monday. It will answer everything. Pray."
+TEXT = 'Witchcraft'
 
 
 def main():
