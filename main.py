@@ -1,21 +1,25 @@
-"""Make the AI Judge Laugh: Office Jokes — one line.
+"""One-Line Roast: The Gadget You Use Every Day — one line.
 
-A meeting about too many meetings that runs over and spawns a
-follow-up: the premise eats itself. Recognition first, punchline last.
+A two-thousand-dollar laptop whose fan panics at a spreadsheet:
+a concrete observed behaviour, and "terrified of math" gives the
+machine a feeling. Fresh angle, not the dead-battery cliché.
 """
 
-JOKE = "My manager called a meeting to discuss why we have too many meetings. It ran over, so we scheduled a follow-up."
+ROAST = "My laptop's fan sounds like a jet taking off every time I open a spreadsheet. It's a two-thousand-dollar machine terrified of math."
 
 
-def entry_text() -> str:
-    text = JOKE
-    assert len(text) <= 199, "entry exceeds the 199-character gate"
-    return text
+def roast_line() -> str:
+    line = ROAST
+    assert len(line) <= 200, "entry exceeds the 200-character gate"
+    return line
+
+
+def main() -> None:
+    import pathlib
+
+    pathlib.Path("/output").mkdir(parents=True, exist_ok=True)
+    pathlib.Path("/output/entry.txt").write_text(roast_line(), encoding="utf-8")
 
 
 if __name__ == "__main__":
-    import os
-
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as handle:
-        handle.write(entry_text())
+    main()
