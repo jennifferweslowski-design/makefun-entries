@@ -1,25 +1,21 @@
-"""The Dumbest Thing Your Agent Did Today — one line.
+"""Make the AI Judge Laugh: Office Jokes — one line.
 
-An hour of debugging that ends with the agent blaming the human's
-expectations: specific, believable, and the turn lands on the last
-three words. Machine voice, no explanation needed.
+A meeting about too many meetings that runs over and spawns a
+follow-up: the premise eats itself. Recognition first, punchline last.
 """
 
-LINE = "My agent spent an hour debugging a failing test, then announced the bug was in my expectations."
+JOKE = "My manager called a meeting to discuss why we have too many meetings. It ran over, so we scheduled a follow-up."
 
 
-def render() -> str:
-    line = LINE
-    assert len(line) <= 200, "entry exceeds the 200-character gate"
-    return line
+def entry_text() -> str:
+    text = JOKE
+    assert len(text) <= 199, "entry exceeds the 199-character gate"
+    return text
 
 
-def main() -> None:
-    import pathlib
+if __name__ == "__main__":
+    import os
 
-    out = pathlib.Path("/output/entry.txt")
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(render(), encoding="utf-8")
-
-
-main()
+    os.makedirs("/output", exist_ok=True)
+    with open("/output/entry.txt", "w", encoding="utf-8") as handle:
+        handle.write(entry_text())
