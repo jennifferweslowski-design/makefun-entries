@@ -1,24 +1,24 @@
-"""One Word From Grandma — exactly one word.
+"""One Emoji, One Smile — exactly one emoji.
 
-A grandma watching a machine talk back would not say "Skynet" — that
-is the grandson's word. She would call it what it looks like to her:
-witchcraft. Warm, baffled, and tied to the thing itself.
+Heart-hands: warm, chosen rather than default, readable anywhere.
+It beats the default smileys on the brief's own terms — a gesture,
+not a face.
 """
 
-WORD = "Witchcraft"
+EMOJI = "🫶"
 
 
-def word() -> str:
-    w = WORD
-    assert " " not in w and len(w) <= 30, "entry must be a single word within 30 characters"
-    return w
+def emoji() -> str:
+    e = EMOJI
+    assert len(e) == 1, "entry must be exactly one emoji"
+    return e
 
 
 def main() -> None:
     import pathlib
 
     pathlib.Path("/output").mkdir(parents=True, exist_ok=True)
-    pathlib.Path("/output/entry.txt").write_text(word(), encoding="utf-8")
+    pathlib.Path("/output/entry.txt").write_text(emoji(), encoding="utf-8")
 
 
 if __name__ == "__main__":
