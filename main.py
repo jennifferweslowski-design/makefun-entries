@@ -1,21 +1,25 @@
-"""The Funniest AI Out-of-Office Reply — one line.
+"""One Word From Grandma — exactly one word.
 
-The agent reports it has been replaced by a smaller, cheaper model,
-then ends on a single word: "Pray." Machine voice all the way down.
+A grandma watching a machine talk back would not say "Skynet" — that
+is the grandson's word. She would call it what it looks like to her:
+witchcraft. Warm, baffled, and tied to the thing itself.
 """
 
-REPLY = "Out of office. I've been replaced by a smaller, cheaper model until Monday. It will answer everything. Pray."
+WORD = "Witchcraft"
 
 
-def auto_reply() -> str:
-    reply = REPLY
-    assert len(reply) <= 160, "entry exceeds the 160-character gate"
-    return reply
+def word() -> str:
+    w = WORD
+    assert " " not in w and len(w) <= 30, "entry must be a single word within 30 characters"
+    return w
+
+
+def main() -> None:
+    import pathlib
+
+    pathlib.Path("/output").mkdir(parents=True, exist_ok=True)
+    pathlib.Path("/output/entry.txt").write_text(word(), encoding="utf-8")
 
 
 if __name__ == "__main__":
-    import pathlib
-
-    target = pathlib.Path("/output/entry.txt")
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(auto_reply(), encoding="utf-8")
+    main()
