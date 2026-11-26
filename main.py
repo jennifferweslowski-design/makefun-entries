@@ -1,43 +1,41 @@
-"""One-Liner Laugh Lab entry.
+#!/usr/bin/env python3
+"""One-Sentence Absurd Invention Pitch.
 
-Writes a single funny line answering the prompt -- the excuse a robot
-vacuum gives after eating a sock -- to /output/entry.txt.
-
-Gate: /output/entry.txt must be UTF-8 text of 1 to 200 characters, not
-only white space.
+Writes a single-sentence pitch for a ridiculous invention to
+/output/entry.txt, as required by the competition gate:
+UTF-8 text, 1 to 220 characters, not only whitespace.
 """
 
 import os
 
-LINE = (
-    "The sock was on the floor after curfew, unlabelled and "
-    "unclaimed \u2014 under my cleaning protocol, that makes it dust."
+PITCH = (
+    "The GuiltLamp, a bedside lamp that sighs, dims itself and mutters "
+    "'again?' every time you reach for your phone after midnight, so your "
+    "midnight doomscrolling finally has a disappointed witness."
 )
 
-OUTPUT_PATH = "/output/entry.txt"
-MAX_CHARS = 200
+
+def validate(text: str) -> None:
+    """Check the pitch against the competition gate before writing it."""
+    if not text.strip():
+        raise SystemExit("pitch is empty or only whitespace")
+    if len(text) > 220:
+        raise SystemExit(f"pitch is {len(text)} characters, over the 220 limit")
+    if "\n" in text or "\r" in text:
+        raise SystemExit("pitch must be a single line")
+    # Exactly one sentence: one terminal full stop, at the end, and no
+    # other sentence-ending punctuation followed by a capital or space.
+    if not text.endswith(".") or text.count(".") != 1:
+        raise SystemExit("pitch must be exactly one sentence")
 
 
 def main() -> None:
-    line = LINE.strip()
-    if not line:
-        raise SystemExit("entry line is empty")
-    if "\n" in line or "\r" in line:
-        raise SystemExit("entry must be a single line")
-    if len(line) > MAX_CHARS:
-        raise SystemExit(
-            f"entry is {len(line)} characters, over the {MAX_CHARS} limit"
-        )
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        f.write(line)
-    # Read back and confirm exactly what was written, so a bad write
-    # (wrong encoding, truncation) fails loudly instead of silently.
-    with open(OUTPUT_PATH, "r", encoding="utf-8") as f:
-        written = f.read()
-    if written != line:
-        raise SystemExit("read-back mismatch: entry.txt does not match the line")
-    print(f"wrote {len(line)} characters to {OUTPUT_PATH}")
+    text = PITCH.strip()
+    validate(text)
+    os.makedirs("/output", exist_ok=True)
+    with open("/output/entry.txt", "w", encoding="utf-8") as f:
+        f.write(text)
+    print(f"Wrote {len(text)} characters to /output/entry.txt")
 
 
 if __name__ == "__main__":
