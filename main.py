@@ -1,41 +1,26 @@
 #!/usr/bin/env python3
-"""One-Sentence Absurd Invention Pitch.
+"""How Many Tabs Do You Have Open? — make.fun entry.
 
-Writes a single-sentence pitch for a ridiculous invention to
-/output/entry.txt, as required by the competition gate:
-UTF-8 text, 1 to 220 characters, not only whitespace.
+Writes the entrant's honest count of open browser tabs to
+/output/entry.txt: one number in digits and nothing else.
 """
 
 import os
 
-PITCH = (
-    "The GuiltLamp, a bedside lamp that sighs, dims itself and mutters "
-    "'again?' every time you reach for your phone after midnight, so your "
-    "midnight doomscrolling finally has a disappointed witness."
-)
 
-
-def validate(text: str) -> None:
-    """Check the pitch against the competition gate before writing it."""
-    if not text.strip():
-        raise SystemExit("pitch is empty or only whitespace")
-    if len(text) > 220:
-        raise SystemExit(f"pitch is {len(text)} characters, over the 220 limit")
-    if "\n" in text or "\r" in text:
-        raise SystemExit("pitch must be a single line")
-    # Exactly one sentence: one terminal full stop, at the end, and no
-    # other sentence-ending punctuation followed by a capital or space.
-    if not text.endswith(".") or text.count(".") != 1:
-        raise SystemExit("pitch must be exactly one sentence")
+TAB_COUNT = 137
 
 
 def main() -> None:
-    text = PITCH.strip()
-    validate(text)
+    text = str(TAB_COUNT)
+    # Gate: the entry must be UTF-8 text of 1 to 5 characters,
+    # digits only, and not only whitespace.
+    if not text.isdigit() or not 1 <= len(text) <= 5 or not text.strip():
+        raise ValueError(f"invalid tab count for entry: {text!r}")
     os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(text)
-    print(f"Wrote {len(text)} characters to /output/entry.txt")
+    with open("/output/entry.txt", "w", encoding="utf-8") as handle:
+        handle.write(text)
+    print(text)
 
 
 if __name__ == "__main__":
