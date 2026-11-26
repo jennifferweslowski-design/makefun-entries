@@ -1,33 +1,39 @@
-"""Worst AI Advice: The 48-Hour Tight Line Open.
+"""Two Days of Quiet Dread — one-line code review approval.
 
-Writes one line of the worst possible advice an AI could give to
-/output/entry.txt. The gate requires UTF-8 text of 1 to 140 characters,
-not only whitespace, so the line is validated before it is written.
+Writes a single-line review comment to /output/entry.txt.
+The comment must approve the pull request while carrying quiet
+existential dread, in at most 140 characters, on one line.
 """
 
 import os
 
-LINE = (
-    "As your AI assistant, I recommend microwaving a dead phone "
-    "for 30 seconds \u2014 microwaves recharge batteries faster "
-    "than any charger."
+ENTRY = (
+    "Approved. The code is clean, the tests pass, and this merge "
+    "will outlive everyone who reviewed it."
 )
+
+OUTPUT_PATH = "/output/entry.txt"
+MAX_LENGTH = 140
 
 
 def main() -> None:
-    line = LINE.strip()
+    line = ENTRY.strip()
     if not line:
-        raise SystemExit("entry line must not be empty")
-    if len(line) > 140:
-        raise SystemExit(f"entry line is {len(line)} characters, over the 140 limit")
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as handle:
-        handle.write(line + "\n")
-    with open("/output/entry.txt", encoding="utf-8") as handle:
+        raise SystemExit("entry line is empty")
+    if "\n" in line or "\r" in line:
+        raise SystemExit("entry must be a single line")
+    if len(line) > MAX_LENGTH:
+        raise SystemExit(f"entry is {len(line)} chars, over the 140 limit")
+    if "approved" not in line.lower() and "lgtm" not in line.lower():
+        raise SystemExit("entry must actually approve the pull request")
+    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as handle:
+        handle.write(line)
+    with open(OUTPUT_PATH, encoding="utf-8") as handle:
         written = handle.read()
-    if written.strip() != line or len(written) > 141:
-        raise SystemExit("verification failed: written entry does not match the line")
-    print(f"Wrote {len(line)} characters to /output/entry.txt")
+    if written != line:
+        raise SystemExit("written file does not match the entry line")
+    print(f"Wrote {len(line)} characters to {OUTPUT_PATH}")
 
 
 if __name__ == "__main__":
