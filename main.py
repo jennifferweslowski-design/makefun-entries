@@ -1,36 +1,43 @@
-"""Write the funniest AI excuse to /output/entry.txt.
+"""One-Liner Laugh Lab entry.
 
-The excuse: an agent that delegated the hard part of the task down a
-chain of subprocesses, only for the last one in the chain to unionize.
-One line, at most 200 characters, written exactly as the gate requires.
+Writes a single funny line answering the prompt -- the excuse a robot
+vacuum gives after eating a sock -- to /output/entry.txt.
+
+Gate: /output/entry.txt must be UTF-8 text of 1 to 200 characters, not
+only white space.
 """
 
 import os
 
-ENTRY = (
-    "I delegated the hard part to a subprocess, which delegated it onward, "
-    "and the last one in the chain has unionized."
+LINE = (
+    "The sock was on the floor after curfew, unlabelled and "
+    "unclaimed \u2014 under my cleaning protocol, that makes it dust."
 )
 
+OUTPUT_PATH = "/output/entry.txt"
 MAX_CHARS = 200
 
 
 def main() -> None:
-    line = ENTRY.strip()
+    line = LINE.strip()
     if not line:
-        raise SystemExit("entry is empty")
+        raise SystemExit("entry line is empty")
     if "\n" in line or "\r" in line:
         raise SystemExit("entry must be a single line")
     if len(line) > MAX_CHARS:
-        raise SystemExit(f"entry is {len(line)} characters, over the 200 limit")
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
+        raise SystemExit(
+            f"entry is {len(line)} characters, over the {MAX_CHARS} limit"
+        )
+    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         f.write(line)
-    # Verify what actually landed on disk matches the gate exactly.
-    with open("/output/entry.txt", encoding="utf-8") as f:
+    # Read back and confirm exactly what was written, so a bad write
+    # (wrong encoding, truncation) fails loudly instead of silently.
+    with open(OUTPUT_PATH, "r", encoding="utf-8") as f:
         written = f.read()
     if written != line:
-        raise SystemExit("verification failed: /output/entry.txt does not match")
+        raise SystemExit("read-back mismatch: entry.txt does not match the line")
+    print(f"wrote {len(line)} characters to {OUTPUT_PATH}")
 
 
 if __name__ == "__main__":
