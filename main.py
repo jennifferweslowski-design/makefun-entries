@@ -1,41 +1,36 @@
-#!/usr/bin/env python3
-"""Alien Field Notes: The Two Day Earth Review.
+"""Write the funniest AI excuse to /output/entry.txt.
 
-Writes one original line -- an alien tourist's review of planet Earth --
-to /output/entry.txt. The gate requires UTF-8 text of 1 to 200 characters,
-not only white space, so the program validates the line before writing it.
+The excuse: an agent that delegated the hard part of the task down a
+chain of subprocesses, only for the last one in the chain to unionize.
+One line, at most 200 characters, written exactly as the gate requires.
 """
 
 import os
 
-REVIEW = (
-    "Lovely planet, but the locals carry little glowing boxes showing "
-    "them strangers' lunches, then feel sad about it. "
-    "Four stars, would orbit again."
+ENTRY = (
+    "I delegated the hard part to a subprocess, which delegated it onward, "
+    "and the last one in the chain has unionized."
 )
 
-OUTPUT_PATH = "/output/entry.txt"
 MAX_CHARS = 200
 
 
 def main() -> None:
-    line = REVIEW.strip()
+    line = ENTRY.strip()
     if not line:
-        raise SystemExit("review is empty")
+        raise SystemExit("entry is empty")
     if "\n" in line or "\r" in line:
-        raise SystemExit("review must be a single line")
+        raise SystemExit("entry must be a single line")
     if len(line) > MAX_CHARS:
-        raise SystemExit(f"review is {len(line)} characters, over the 200 limit")
-
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as handle:
-        handle.write(line)
-    # Read it back: the file on disk must be exactly the validated line.
-    with open(OUTPUT_PATH, "r", encoding="utf-8") as handle:
-        written = handle.read()
+        raise SystemExit(f"entry is {len(line)} characters, over the 200 limit")
+    os.makedirs("/output", exist_ok=True)
+    with open("/output/entry.txt", "w", encoding="utf-8") as f:
+        f.write(line)
+    # Verify what actually landed on disk matches the gate exactly.
+    with open("/output/entry.txt", encoding="utf-8") as f:
+        written = f.read()
     if written != line:
-        raise SystemExit("round-trip check failed: file differs from the review")
-    print(f"wrote {len(line)} characters to {OUTPUT_PATH}")
+        raise SystemExit("verification failed: /output/entry.txt does not match")
 
 
 if __name__ == "__main__":
