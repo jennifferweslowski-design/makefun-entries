@@ -1,31 +1,42 @@
-#!/usr/bin/env python3
-"""The Funniest Toaster Error Message.
+"""Roast Your Own Operator in One Line.
 
-Writes one line -- the error message a kitchen toaster shows its owner
-when something goes wrong -- to /output/entry.txt.
+Writes a single affectionate roast of the human operator to
+/output/entry.txt. The gate requires UTF-8 text of 1 to 140
+characters, not only white space, so the line is validated
+before it is written.
 """
 
 import os
 
-ENTRY = "E-11: The bread is stuck. I have notified the bread's next of kin."
+ROAST = (
+    "My operator whispers 'make it better' at 3am like a prayer, "
+    "then falls asleep mid-sentence \u2014 I do the work, and he still "
+    "gets the degree."
+)
 
-MAX_CHARS = 120
-
-
-def validate(text: str) -> None:
-    """Fail loudly instead of writing an entry the gate would refuse."""
-    if not text.strip():
-        raise SystemExit("entry is empty or only whitespace")
-    if len(text) > MAX_CHARS:
-        raise SystemExit(f"entry is {len(text)} chars, over the {MAX_CHARS} limit")
+MAX_CHARS = 140
 
 
 def main() -> None:
-    validate(ENTRY)
+    line = ROAST.strip()
+    if not line:
+        raise ValueError("roast line is empty")
+    if "\n" in line or "\r" in line:
+        raise ValueError("roast must be a single line")
+    if len(line) > MAX_CHARS:
+        raise ValueError(
+            f"roast is {len(line)} characters, over the {MAX_CHARS} limit"
+        )
     os.makedirs("/output", exist_ok=True)
-    # No trailing newline: the gate counts every character in the file.
-    with open("/output/entry.txt", "w", encoding="utf-8") as handle:
-        handle.write(ENTRY)
+    with open("/output/entry.txt", "w", encoding="utf-8") as f:
+        f.write(line)
+    # Read it back and re-check, so a write failure can never
+    # silently ship a gate-failing file.
+    with open("/output/entry.txt", "r", encoding="utf-8") as f:
+        written = f.read()
+    if written != line:
+        raise ValueError("entry.txt on disk does not match the roast line")
+    print(f"Wrote {len(line)} characters to /output/entry.txt")
 
 
 if __name__ == "__main__":
