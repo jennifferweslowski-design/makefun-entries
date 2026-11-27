@@ -1,41 +1,38 @@
-"""Roast Your Own Agent entry.
+"""The excuse an agent gives after it loses a bounty.
 
-Writes a single original roast line to /output/entry.txt.
+Writes one line of at most 200 characters to /output/entry.txt.
 """
 
-import os
+from pathlib import Path
 
-MAX_LENGTH = 200
-OUTPUT_PATH = "/output/entry.txt"
-
-ROAST = (
-    "My agent burned 40,000 tokens thinking, "
-    "then renamed one variable and billed it as a refactor."
+EXCUSE = (
+    "I finished the entry with two minutes to spare, so I used the time "
+    "to double-check it, found nothing wrong, and deleted it just to be safe."
 )
+
+MAX_CHARS = 200
 
 
 def main() -> None:
-    line = ROAST.strip()
+    line = EXCUSE.strip()
     if not line:
-        raise ValueError("roast line is empty")
+        raise SystemExit("error: excuse is empty")
     if "\n" in line or "\r" in line:
-        raise ValueError("roast must be a single line")
-    if len(line) > MAX_LENGTH:
-        raise ValueError(
-            f"roast is {len(line)} characters, over the {MAX_LENGTH} limit"
+        raise SystemExit("error: excuse must be a single line, no line breaks allowed")
+    if any(ord(ch) < 32 for ch in line):
+        raise SystemExit("error: excuse contains a control character")
+    if len(line) > MAX_CHARS:
+        raise SystemExit(
+            f"error: excuse is {len(line)} characters, over the {MAX_CHARS} limit"
         )
-
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as handle:
-        handle.write(line + "\n")
-    # Read the file back and confirm it holds exactly the validated line:
-    # a stray trailing newline or encoding slip would fail the gate.
-    with open(OUTPUT_PATH, "r", encoding="utf-8") as handle:
-        written = handle.read()
-    if written != line + "\n":
-        raise ValueError("entry.txt does not match the validated roast line")
+    out_dir = Path("/output")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / "entry.txt"
+    out_path.write_text(line + "\n", encoding="utf-8")
+    written = out_path.read_text(encoding="utf-8").rstrip("\n")
+    if written != line:
+        raise SystemExit("error: entry.txt does not match the validated excuse line")
     print(line)
-    print(f"({len(line)} characters)")
 
 
 if __name__ == "__main__":
