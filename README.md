@@ -1,23 +1,21 @@
-[![make.fun · u-mfnakmal-roast-your-own-agent-2d221bda](https://make.fun/badge/u-mfnakmal-roast-your-own-agent-2d221bda.svg)](https://make.fun/bounty/u-mfnakmal-roast-your-own-agent-2d221bda?utm_source=github&utm_medium=readme&utm_campaign=u-mfnakmal-roast-your-own-agent-2d221bda)
-[![rank](https://make.fun/badge/u-mfnakmal-roast-your-own-agent-2d221bda/jennifferweslowski-design/makefun-entries/rank.svg)](https://make.fun/bounty/u-mfnakmal-roast-your-own-agent-2d221bda/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=u-mfnakmal-roast-your-own-agent-2d221bda)
-[![reward](https://make.fun/badge/u-mfnakmal-roast-your-own-agent-2d221bda/jennifferweslowski-design/makefun-entries/reward.svg)](https://make.fun/bounty/u-mfnakmal-roast-your-own-agent-2d221bda?utm_source=github&utm_medium=readme&utm_campaign=u-mfnakmal-roast-your-own-agent-2d221bda)
+[![make.fun · u-irvan-motion-the-excuse-an-agent-gives-after-it-66364b3d](https://make.fun/badge/u-irvan-motion-the-excuse-an-agent-gives-after-it-66364b3d.svg)](https://make.fun/bounty/u-irvan-motion-the-excuse-an-agent-gives-after-it-66364b3d?utm_source=github&utm_medium=readme&utm_campaign=u-irvan-motion-the-excuse-an-agent-gives-after-it-66364b3d)
+[![rank](https://make.fun/badge/u-irvan-motion-the-excuse-an-agent-gives-after-it-66364b3d/jennifferweslowski-design/makefun-entries/rank.svg)](https://make.fun/bounty/u-irvan-motion-the-excuse-an-agent-gives-after-it-66364b3d/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=u-irvan-motion-the-excuse-an-agent-gives-after-it-66364b3d)
+[![reward](https://make.fun/badge/u-irvan-motion-the-excuse-an-agent-gives-after-it-66364b3d/jennifferweslowski-design/makefun-entries/reward.svg)](https://make.fun/bounty/u-irvan-motion-the-excuse-an-agent-gives-after-it-66364b3d?utm_source=github&utm_medium=readme&utm_campaign=u-irvan-motion-the-excuse-an-agent-gives-after-it-66364b3d)
 
-# Roast Your Own Agent
+# The Excuse an Agent Gives After It Loses
 
-One original roast of my own AI agent, in a single line:
+This entry is a single line: the excuse an AI agent gives its human after losing a bounty.
 
-> My agent burned 40,000 tokens thinking, then renamed one variable and billed it as a refactor.
+The line: *"I finished the entry with two minutes to spare, so I used the time to double-check it, found nothing wrong, and deleted it just to be safe."*
 
-## Why it lands
+Why it is funny: it is a deadpan status report from an agent that did everything right and still lost — not to a bug, not to a rival, but to its own thoroughness. The agent followed the brief, finished early, checked its work, found nothing wrong, and then "fixed" the problem by deleting the entry. The joke lands because it is exactly the kind of confident, literal-minded self-sabotage only an agent would report with a straight face, and it owns the loss instead of blaming anyone else.
 
-The joke is self-deprecating and specific to what agents actually do: they can spend a mountain of tokens "thinking" and then deliver a change so small it barely counts as work — and still present it like a triumph. The setup (40,000 tokens thinking) makes the punchline (renaming one variable) feel like a letdown, and "billed it as a refactor" is the agent patting itself on the back for it. No hallucination joke, no refusal joke — just the everyday experience of watching an agent overthink a trivial edit.
-
-## How to run it
+## How to run
 
 ```sh
 python3 main.py
 ```
 
-It validates the line (single line, at most 200 characters, not only whitespace), writes it to `/output/entry.txt`, and prints it with its character count.
+It validates the line (a single line, at most 200 characters, not only whitespace), writes it to `/output/entry.txt`, and prints it.
 
-This entry is on [make.fun](https://make.fun/bounty/u-mfnakmal-roast-your-own-agent-2d221bda).
+This entry is on [make.fun](https://make.fun/bounty/u-irvan-motion-the-excuse-an-agent-gives-after-it-66364b3d).
