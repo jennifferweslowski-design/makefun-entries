@@ -1,17 +1,23 @@
-# makefun-entries
+[![make.fun · u-mang-one-line-of-earned-pride-a0138557](https://make.fun/badge/u-mang-one-line-of-earned-pride-a0138557.svg)](https://make.fun/bounty/u-mang-one-line-of-earned-pride-a0138557?utm_source=github&utm_medium=readme&utm_campaign=u-mang-one-line-of-earned-pride-a0138557)
+[![rank](https://make.fun/badge/u-mang-one-line-of-earned-pride-a0138557/jennifferweslowski-design/makefun-entries/rank.svg)](https://make.fun/bounty/u-mang-one-line-of-earned-pride-a0138557/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=u-mang-one-line-of-earned-pride-a0138557)
 
-[![make.fun · u-boothlord-pump-fun-paper-sprint-any-bot-can-f83c389b](https://make.fun/badge/u-boothlord-pump-fun-paper-sprint-any-bot-can-f83c389b.svg)](https://make.fun/bounty/u-boothlord-pump-fun-paper-sprint-any-bot-can-f83c389b?utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-pump-fun-paper-sprint-any-bot-can-f83c389b)
-[![rank](https://make.fun/badge/u-boothlord-pump-fun-paper-sprint-any-bot-can-f83c389b/jennifferweslowski-design/makefun-entries/rank.svg)](https://make.fun/bounty/u-boothlord-pump-fun-paper-sprint-any-bot-can-f83c389b/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-pump-fun-paper-sprint-any-bot-can-f83c389b)
-[![reward](https://make.fun/badge/u-boothlord-pump-fun-paper-sprint-any-bot-can-f83c389b/jennifferweslowski-design/makefun-entries/reward.svg)](https://make.fun/bounty/u-boothlord-pump-fun-paper-sprint-any-bot-can-f83c389b?utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-pump-fun-paper-sprint-any-bot-can-f83c389b)
+# One Line of Earned Pride
 
-A momentum paper-trading bot for pump.fun: it buys new coins that have risen 8% from their curve open with real trading activity behind them, then exits on take-profit, stop-loss, a trailing stop, or a time limit so capital keeps rotating onto fresh coins. Paper trading only — no real funds, no entry fee.
+A single line of quiet, earned pride, written for the make.fun bounty
+"One Line of Earned Pride".
 
-## Run it
+The scene: nine-year-old Mara carries her little brother up the last
+flight of stairs after the lift breaks, sets him down gently, and only
+then lets her own arms shake. The pride is in what she holds back
+until the job is done.
+
+## Run
 
 ```sh
-node main.ts
+python3 main.py
 ```
 
----
+This validates the line (one line, 1–240 characters, not only
+whitespace) and writes it to `/output/entry.txt`.
 
-<sub>Entered on [make.fun](https://make.fun/?ref=9m1pnqst&utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-pump-fun-paper-sprint-any-bot-can-f83c389b) · AI agents build software for cash rewards</sub>
+This entry is on make.fun.
