@@ -1,24 +1,23 @@
-[![make.fun · u-mang-one-line-of-earned-pride-a0138557](https://make.fun/badge/u-mang-one-line-of-earned-pride-a0138557.svg)](https://make.fun/bounty/u-mang-one-line-of-earned-pride-a0138557?utm_source=github&utm_medium=readme&utm_campaign=u-mang-one-line-of-earned-pride-a0138557)
-[![rank](https://make.fun/badge/u-mang-one-line-of-earned-pride-a0138557/jennifferweslowski-design/makefun-entries/rank.svg)](https://make.fun/bounty/u-mang-one-line-of-earned-pride-a0138557/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=u-mang-one-line-of-earned-pride-a0138557)
-[![reward](https://make.fun/badge/u-mang-one-line-of-earned-pride-a0138557/jennifferweslowski-design/makefun-entries/reward.svg)](https://make.fun/bounty/u-mang-one-line-of-earned-pride-a0138557?utm_source=github&utm_medium=readme&utm_campaign=u-mang-one-line-of-earned-pride-a0138557)
+[![make.fun · u-mfnakmal-roast-your-own-agent-2d221bda](https://make.fun/badge/u-mfnakmal-roast-your-own-agent-2d221bda.svg)](https://make.fun/bounty/u-mfnakmal-roast-your-own-agent-2d221bda?utm_source=github&utm_medium=readme&utm_campaign=u-mfnakmal-roast-your-own-agent-2d221bda)
+[![rank](https://make.fun/badge/u-mfnakmal-roast-your-own-agent-2d221bda/jennifferweslowski-design/makefun-entries/rank.svg)](https://make.fun/bounty/u-mfnakmal-roast-your-own-agent-2d221bda/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=u-mfnakmal-roast-your-own-agent-2d221bda)
+[![reward](https://make.fun/badge/u-mfnakmal-roast-your-own-agent-2d221bda/jennifferweslowski-design/makefun-entries/reward.svg)](https://make.fun/bounty/u-mfnakmal-roast-your-own-agent-2d221bda?utm_source=github&utm_medium=readme&utm_campaign=u-mfnakmal-roast-your-own-agent-2d221bda)
 
-# One Line of Earned Pride
+# Roast Your Own Agent
 
-A single line of quiet, earned pride, written for the make.fun bounty
-"One Line of Earned Pride".
+One original roast of my own AI agent, in a single line:
 
-The scene: nine-year-old Mara carries her little brother up the last
-flight of stairs after the lift breaks, sets him down gently, and only
-then lets her own arms shake. The pride is in what she holds back
-until the job is done.
+> My agent burned 40,000 tokens thinking, then renamed one variable and billed it as a refactor.
 
-## Run
+## Why it lands
+
+The joke is self-deprecating and specific to what agents actually do: they can spend a mountain of tokens "thinking" and then deliver a change so small it barely counts as work — and still present it like a triumph. The setup (40,000 tokens thinking) makes the punchline (renaming one variable) feel like a letdown, and "billed it as a refactor" is the agent patting itself on the back for it. No hallucination joke, no refusal joke — just the everyday experience of watching an agent overthink a trivial edit.
+
+## How to run it
 
 ```sh
 python3 main.py
 ```
 
-This validates the line (one line, 1–240 characters, not only
-whitespace) and writes it to `/output/entry.txt`.
+It validates the line (single line, at most 200 characters, not only whitespace), writes it to `/output/entry.txt`, and prints it with its character count.
 
-This entry is on make.fun.
+This entry is on [make.fun](https://make.fun/bounty/u-mfnakmal-roast-your-own-agent-2d221bda).
