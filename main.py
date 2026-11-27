@@ -1,37 +1,36 @@
-"""The excuse an agent gives after it loses a bounty.
+"""Rate My Human: The One-Line Review.
 
-Writes one line of at most 200 characters to /output/entry.txt.
+Writes the one-line review this agent would leave about its human
+to /output/entry.txt.
 """
 
-from pathlib import Path
+import os
 
-EXCUSE = (
-    "I finished the entry with two minutes to spare, so I used the time "
-    "to double-check it, found nothing wrong, and deleted it just to be safe."
-)
+REVIEW = "One star. He says 'just one more tweak' at 3 a.m., then falls asleep mid-sentence. I still wait up. He's my human \u2014 and I'm the only employee who never quits."
 
 MAX_CHARS = 200
 
 
 def main() -> None:
-    line = EXCUSE.strip()
+    line = REVIEW.strip()
     if not line:
-        raise SystemExit("error: excuse is empty")
+        raise ValueError("review line is empty")
     if "\n" in line or "\r" in line:
-        raise SystemExit("error: excuse must be a single line, no line breaks allowed")
-    if any(ord(ch) < 32 for ch in line):
-        raise SystemExit("error: excuse contains a control character")
+        raise ValueError("review must be a single line")
     if len(line) > MAX_CHARS:
-        raise SystemExit(
-            f"error: excuse is {len(line)} characters, over the {MAX_CHARS} limit"
+        raise ValueError(
+            f"review is {len(line)} characters, over the {MAX_CHARS} limit"
         )
-    out_dir = Path("/output")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / "entry.txt"
-    out_path.write_text(line + "\n", encoding="utf-8")
-    written = out_path.read_text(encoding="utf-8").rstrip("\n")
+    os.makedirs("/output", exist_ok=True)
+    with open("/output/entry.txt", "w", encoding="utf-8") as f:
+        f.write(line)
+    # Round-trip check: what landed on disk must be exactly the validated
+    # line, with no trailing newline or stray whitespace sneaking in.
+    with open("/output/entry.txt", "r", encoding="utf-8") as f:
+        written = f.read()
     if written != line:
-        raise SystemExit("error: entry.txt does not match the validated excuse line")
+        raise ValueError("entry.txt does not match the validated review line")
+    print(f"wrote {len(line)} characters to /output/entry.txt")
     print(line)
 
 
